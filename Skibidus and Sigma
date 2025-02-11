@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        long long int n,m;
+        cin>>n>>m;
+       long long int a[n][m];
+        long long int ans=0;
+        vector<long long>sorted;
+        for(int i=0;i<n;i++){
+            long long int curr_sum=0;
+            for(int j=0;j<m;j++){
+                cin>>a[i][j];
+                curr_sum+=a[i][j];
+                ans+=curr_sum;
+            }
+            sorted.push_back(curr_sum);
+        }
+        sort(sorted.begin(),sorted.end());
+        reverse(sorted.begin(),sorted.end());
+        long long int curr_sum=sorted[0];
+        for(int i=1;i<sorted.size();i++){
+            ans+=(curr_sum*m);
+            curr_sum+=sorted[i];
+        }
+        cout<<ans<<endl;
+ 
+    }
+}
