@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n,m;
+        cin>>n>>m;
+        int a[n];
+        int b[m];
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+        for(int j=0;j<m;j++){
+            cin>>b[j];
+        }
+        bool check=true;
+        int replace=b[0]-a[n-1];
+        if(replace>a[n-1]){
+            a[n-1]=replace;
+        }
+        for(int i=n-2;i>=0;i--){
+              replace=b[0]-a[i];
+              if(a[i]>a[i+1]){
+                  a[i]=replace;
+              }
+              if(replace>a[i] and replace<=a[i+1]){
+                  a[i]=replace;
+              }
+        }
+        for(int i=1;i<n;i++){
+            if(a[i]<a[i-1]){
+                check=false;
+                break;
+            }
+        }
+        if(check){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+    }
+}
