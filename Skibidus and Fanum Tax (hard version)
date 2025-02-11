@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n,m;
+        cin>>n>>m;
+        int a[n];
+        int b[m];
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+        for(int i=0;i<m;i++){
+            cin>>b[i];
+        }
+        sort(b,b+m);
+        int replace=b[0]-a[0];
+        int pre=a[0];
+        if(replace<a[0]){
+            a[0]=replace;
+            pre=replace;
+        }
+        bool res=true;
+        for(int i=1;i<n;i++){
+            // if a[i]<pre value then we need to chnage
+            auto final_val=lower_bound(b,b+m,a[i]+pre);
+            if(final_val!=b+m){
+                if(a[i]<pre){
+                    a[i]=(*final_val)-a[i];
+                }else{
+                    a[i]=min(a[i],(*final_val)-a[i]);
+                }
+            }
+            if(a[i]<pre){
+                res=false;
+                break;
+            }
+            pre=a[i];
+        }
+       if(res){
+           cout<<"YES"<<endl;
+       }else{
+           cout<<"NO"<<endl;
+       }
+    }
+}
